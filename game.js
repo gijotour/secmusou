@@ -1074,7 +1074,7 @@ function dropItem(kind, x, y) { game.items.push({ kind, x, y, t: 0, bob: Math.ra
 const itemLife = (it) => (it.kind === 'backup' ? 1e9 : it.kind === 'gijo' || it.kind === 'inspect' ? 40 : 22);
 
 // ───────────────────────── GIJO 특별 아이템 ─────────────────────────
-// 획득 시 15초간 "GIJO AS 가동": AI 보안관제 드론 3기 자동 요격 + 공격력 2배 + 무적 + 이속 30%↑ + 무쌍·HP 풀충전
+// 획득 시 15초간 "GIJO ASTER 가동": AI 보안관제 드론 3기 자동 요격 + 공격력 2배 + 무적 + 이속 30%↑ + 무쌍·HP 풀충전
 const GIJO_DUR = 15;
 function dropGijo(x, y, airdrop) {
   if (game.items.some((it) => it.kind === 'gijo')) return;
@@ -1090,7 +1090,7 @@ function activateGijo() {
   game.drones = [0, 1, 2].map((i) => ({ i, cd: i * 0.08, x: p.x, y: p.y }));
   audio.capture(); audio.musou(); addShake(14); screenFlash('#ffd740', 0.7); game.slowT = 0.5; game.zoomPunch = 0.12;
   ring(p.x, p.y, 20, 360, '#ffd740', 0.7, 18); keycapBurst(p.x, p.y, 12);
-  banner('GIJO AS 가동!!', 'AI 보안관제 드론 3기 자동 요격 · 공격력 2배 · 무적 15초', '#ffd740', 3, 72);
+  banner('GIJO ASTER 가동!!', 'AI 보안관제 드론 3기 자동 요격 · 공격력 2배 · 무적 15초', '#ffd740', 3, 72);
   msg('[GIJO] AI 보안관제 모드 활성화 — 드론이 위협을 자동 요격합니다', '#ffd740');
 }
 function updateGijo(dt) {
@@ -1719,7 +1719,7 @@ const ACHS = [
   ['log5', '로그 탐정', '한 판에 로그 분석 정답 5', () => game.logRight >= 5],
   ['bases', '전 거점 탈환', '한 판에 거점 6곳 확보', () => game.bases.length > 0 && game.bases.every((b) => b.owner === 'ally')],
   ['zero', '제로데이 헌터', '제로데이 격파', () => !!codexSeen['zero:0day']],
-  ['gijo', 'GIJO AS 가동', 'GIJO 아이템 사용', () => game.gijoUsed],
+  ['gijo', 'GIJO ASTER 가동', 'GIJO 아이템 사용', () => game.gijoUsed],
   ['office', '칼퇴 수호자', '직장 스트레스 몹 누적 10', () => stats.officeKo >= 10],
   ['daily', '오늘의 CVE', '오늘의 CVE 격파', () => game.dailyDone],
   ['weapons', '장비 수집가', '무기 6종 전부 해금', () => WEAPONS.every(isUnlocked)],

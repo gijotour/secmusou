@@ -21,3 +21,6 @@ Thumbs.db
 
 # 내부 리뷰 메모(로컬 경로가 들어 있음) — 공개 저장소에 올리지 않음
 tools/out-agy-review*.md
+
+# Labs 세션 전달 메모 (로컬 경로가 들어 있음)
+HANDOFF-LABS.md

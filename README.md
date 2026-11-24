@@ -126,7 +126,8 @@ GB10이 만든 로그·퀴즈는 모두 사실 확인을 거쳤고, 교정 내�
    4. GB10이 카드·퀴즈 초안 작성
    5. 결과를 `tools/cve-packs/YYYY-MM.draft.json` 에 저장
 2. **검수**: 초안을 KEV·NVD 원문과 대조합니다. 원문에 없는 사실은 빼고 퀴즈 정답을 확인한 뒤, `"status": "verified"` 로 `YYYY-MM.json` 에 저장합니다.
-3. `node tools/build-content.mjs` 를 실행하면 검수된 팩만 `content.js` 에 합쳐집니다. 그다음 공유 페이지를 다시 게시합니다.
+3. `node tools/build-content.mjs` 를 실행하면 검수된 팩만 `content.js` 에 합쳐집니다.
+4. **게시(승인 후)**: 이 폴더는 공개 저장소 [gijotour/secmusou](https://github.com/gijotour/secmusou) 의 작업 사본입니다. 승인을 받으면 `content.js`·`README.md`·`tools/cve-packs/YYYY-MM.json` 을 커밋해 `main` 에 푸시합니다. 그러면 몇 분 안에 GitHub Pages(공개 게임)와 gijo.co.kr 소개 페이지의 「게임 하기」에 반영됩니다. 공유 페이지(랭킹)도 같은 때 다시 게시합니다.
 
 게임에서는 신규 CVE가 오늘의 CVE 다음 적장으로 먼저 나오고, 🆕 KEV 배지가 붙습니다.
 
@@ -137,7 +138,7 @@ GB10이 만든 로그·퀴즈는 모두 사실 확인을 거쳤고, 교정 내�
 
 ## GIJO 특별 아이템 ◆
 
-금색 GIJO 블록을 먹으면 15초간 **GIJO AS 가동** 상태가 됩니다.
+금색 GIJO 블록을 먹으면 15초간 **GIJO ASTER 가동** 상태가 됩니다.
 AI 보안관제 드론 3기가 자동으로 요격하고, 공격력 2배, 무적, 이동속도 증가, 무쌍 게이지와 HP가 가득 찹니다.
 2분마다 맵에 투하되며(미니맵 금색 ◆), 적장(45%)과 거점관리자(30%)도 드롭합니다.
 

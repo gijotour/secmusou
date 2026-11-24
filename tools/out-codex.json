@@ -1,0 +1,294 @@
+{
+  "bases": [
+    {
+      "id": "injection",
+      "owasp": "A03:2021 Injection",
+      "cwe": "CWE-89",
+      "base": "인젝션 요새",
+      "keeper": "SQL 인젝션",
+      "summary": "외부 입력이 검증 없이 쿼리에 결합되어 데이터베이스 명령이 조작되는 취약점이다.",
+      "attack": "사용자 입력 필드에 비정상 구문을 주입해 쿼리 논리를 변조하는 시나리오",
+      "defense": [
+        "매개변수화 쿼리(Prepared Statement) 사용",
+        "입력값 화이트리스트 검증 적용",
+        "DB 계정에 최소 권한 부여"
+      ],
+      "quiz": {
+        "q": "SQL 인젝션을 근본적으로 방지하는 핵심 기법은?",
+        "choices": [
+          "매개변수화 쿼리 사용",
+          "에러 메시지 상세 출력",
+          "문자열 단순 결합 유지"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "데이터와 명령 구문을 분리해 해석 오류를 차단한다."
+      }
+    },
+    {
+      "id": "broken-access-control",
+      "owasp": "A01:2021 Broken Access Control",
+      "cwe": "CWE-639",
+      "base": "접근통제 성채",
+      "keeper": "IDOR",
+      "summary": "객체 접근 시 사용자 권한을 검증하지 않아 타인의 자원에 무단 접근되는 취약점이다.",
+      "attack": "요청 식별자를 타 사용자 값으로 변경해 권한 없는 정보를 조회하는 시나리오",
+      "defense": [
+        "서버 측 객체별 인가 검증 강제",
+        "예측 불가능한 식별자(UUID) 사용",
+        "기본 거부(Deny by Default) 정책 적용"
+      ],
+      "quiz": {
+        "q": "IDOR 취약점을 막기 위한 필수 조치는?",
+        "choices": [
+          "클라이언트 UI에서만 버튼 숨김",
+          "서버 측 소유권 및 권한 검증",
+          "순차적 정수 ID 노출 유지"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "요청마다 서버에서 사용자 권한을 직접 확인해야 한다."
+      }
+    },
+    {
+      "id": "cryptographic-failures",
+      "owasp": "A02:2021 Cryptographic Failures",
+      "cwe": "CWE-327",
+      "base": "암호화 금고",
+      "keeper": "취약한 암호화",
+      "summary": "민감 데이터를 평문 저장하거나 취약한 알고리즘으로 보호해 기밀성이 훼손되는 취약점이다.",
+      "attack": "암호화되지 않은 전송 구간이나 구형 해시 저장소에서 민감 정보를 탈취하는 시나리오",
+      "defense": [
+        "TLS 등 안전한 전송 구간 암호화 적용",
+        "비밀번호에 솔트 포함 최신 해시 사용",
+        "안전한 키 관리 및 주기적 교체"
+      ],
+      "quiz": {
+        "q": "비밀번호 저장 시 가장 안전한 방식은?",
+        "choices": [
+          "평문 그대로 데이터베이스 저장",
+          "솔트 적용된 안전한 단방향 해시 사용",
+          "고정 키 기반 대칭 암호화만 사용"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "복호화가 불가능한 솔트 기반 해시로 유출 피해를 줄인다."
+      }
+    },
+    {
+      "id": "vulnerable-components",
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "cwe": "CWE-1104",
+      "base": "구버전 병기고",
+      "keeper": "취약한 컴포넌트",
+      "summary": "알려진 결함이 있는 구버전 라이브러리나 프레임워크를 방치해 침해로 이어지는 취약점이다.",
+      "attack": "패치되지 않은 오픈소스 의존성의 공개 결함을 악용해 시스템에 침투하는 시나리오",
+      "defense": [
+        "SBOM 기반 의존성 목록 상시 관리",
+        "보안 패치 및 최신 버전 주기적 적용",
+        "미사용 라이브러리 및 기능 제거"
+      ],
+      "quiz": {
+        "q": "취약한 컴포넌트 관리의 핵심 활동은?",
+        "choices": [
+          "오래된 라이브러리 영구 고정",
+          "의존성 식별 및 정기 보안 업데이트",
+          "오픈소스 버전 정보만 숨기기"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "사용 중인 구성요소를 파악하고 신속히 패치해야 한다."
+      }
+    },
+    {
+      "id": "auth-failures",
+      "owasp": "A07:2021 Identification and Authentication Failures",
+      "cwe": "CWE-287",
+      "base": "인증 관문",
+      "keeper": "인증 실패",
+      "summary": "취약한 비밀번호 정책이나 세션 관리 결함으로 계정 탈취가 발생하는 취약점이다.",
+      "attack": "자동화된 자격 증명 대입이나 만료되지 않은 세션 재사용으로 계정을 장악하는 시나리오",
+      "defense": [
+        "다중 인증(MFA) 도입",
+        "로그인 시도 횟수 제한 및 지연 적용",
+        "로그인 후 세션 식별자 재발급"
+      ],
+      "quiz": {
+        "q": "계정 탈취 방어에 가장 효과적인 추가 통제는?",
+        "choices": [
+          "다중 인증(MFA) 적용",
+          "세션 만료 시간 무제한 설정",
+          "단순 숫자 비밀번호 허용"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "추가 인증 요소로 비밀번호 유출 시 위험을 크게 낮춘다."
+      }
+    },
+    {
+      "id": "ssrf",
+      "owasp": "A10:2021 Server-Side Request Forgery",
+      "cwe": "CWE-918",
+      "base": "내부망 교두보",
+      "keeper": "SSRF",
+      "summary": "서버가 외부 입력 URL을 검증 없이 요청해 내부 네트워크 자원에 접근하게 되는 취약점이다.",
+      "attack": "외부 URL 입력 기능을 악용해 서버가 내부 관리 서비스에 요청을 보내게 하는 시나리오",
+      "defense": [
+        "허용된 도메인·프로토콜 화이트리스트 제한",
+        "내부 IP 대역 접근 네트워크 차단",
+        "HTTP 리다이렉션 자동 추적 비활성화"
+      ],
+      "quiz": {
+        "q": "SSRF 공격을 완화하는 적절한 방어책은?",
+        "choices": [
+          "모든 외부 URL 요청 무제한 허용",
+          "요청 대상 도메인 화이트리스트 검증",
+          "내부 서버 응답 원문 전체 반환"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "서버의 외부 요청 대상을 엄격히 제한해 내부망 노출을 막는다."
+      }
+    }
+  ],
+  "cves": [
+    {
+      "name": "Log4Shell",
+      "cve": "CVE-2021-44228",
+      "cvss": 10.0,
+      "product": "Apache Log4j 2",
+      "summary": "로그 메시지의 JNDI 조회 처리 결함으로 원격 코드 실행이 가능한 취약점이다.",
+      "fix": "Log4j 2.17.1 이상 최신 보안 버전으로 업그레이드한다.",
+      "quiz": {
+        "q": "Log4Shell(CVE-2021-44228)의 핵심 원인은?",
+        "choices": [
+          "JNDI 조회 기능의 검증 누락",
+          "TLS 인증서 만료 처리 오류",
+          "클라이언트 쿠키 만료 미설정"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "외부 입력이 로그 조회 기능으로 해석되며 발생한다."
+      }
+    },
+    {
+      "name": "Spring4Shell",
+      "cve": "CVE-2022-22965",
+      "cvss": 9.8,
+      "product": "Spring Framework",
+      "summary": "특정 환경의 데이터 바인딩 처리 결함으로 원격 코드 실행이 가능한 취약점이다.",
+      "fix": "Spring Framework 패치 버전으로 즉시 업데이트한다.",
+      "quiz": {
+        "q": "Spring4Shell의 가장 확실한 대응 방안은?",
+        "choices": [
+          "패치된 Spring Framework로 업그레이드",
+          "HTML 주석만 제거",
+          "브라우저 캐시 초기화"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "취약한 데이터 바인딩을 수정한 공식 패치를 적용해야 한다."
+      }
+    },
+    {
+      "name": "Apache Struts 2 RCE",
+      "cve": "CVE-2017-5638",
+      "cvss": 10.0,
+      "product": "Apache Struts 2",
+      "summary": "파일 업로드 파서의 헤더 처리 결함으로 원격 명령 실행이 가능한 취약점이다.",
+      "fix": "Apache Struts 2를 보안 패치 버전으로 업그레이드한다.",
+      "quiz": {
+        "q": "CVE-2017-5638이 발생한 주요 처리 지점은?",
+        "choices": [
+          "파일 업로드 요청의 헤더 파싱",
+          "데이터베이스 백업 스케줄러",
+          "DNS 캐시 동기화 모듈"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "잘못된 헤더 예외 처리 과정에서 표현식이 평가되어 발생한다."
+      }
+    },
+    {
+      "name": "Shellshock",
+      "cve": "CVE-2014-6271",
+      "cvss": 9.8,
+      "product": "GNU Bash",
+      "summary": "환경 변수 내 함수 정의 파싱 결함으로 의도치 않은 명령이 실행되는 취약점이다.",
+      "fix": "GNU Bash 패키지를 보안 패치 버전으로 업데이트한다.",
+      "quiz": {
+        "q": "Shellshock 취약점의 영향 대상 소프트웨어는?",
+        "choices": [
+          "GNU Bash",
+          "Apache Tomcat",
+          "SQLite"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "셸 환경 변수 처리 과정의 결함에서 비롯된다."
+      }
+    },
+    {
+      "name": "Heartbleed",
+      "cve": "CVE-2014-0160",
+      "cvss": 7.5,
+      "product": "OpenSSL",
+      "summary": "TLS 하트비트 확장의 경계 검사 누락으로 서버 메모리가 유출되는 취약점이다.",
+      "fix": "OpenSSL 패치 적용 후 인증서·개인키를 재발급한다.",
+      "quiz": {
+        "q": "Heartbleed 패치 후 반드시 병행해야 하는 조치는?",
+        "choices": [
+          "개인키 및 인증서 교체",
+          "방화벽 로그 전체 삭제",
+          "암호화 통신 비활성화"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "메모리 유출 가능성 때문에 기존 키를 교체해야 한다."
+      }
+    },
+    {
+      "name": "Zerologon",
+      "cve": "CVE-2020-1472",
+      "cvss": 10.0,
+      "product": "Microsoft Windows Netlogon",
+      "summary": "Netlogon 원격 프로토콜의 암호화 구현 결함으로 권한 상승이 가능한 취약점이다.",
+      "fix": "Windows 보안 업데이트 적용 및 안전한 RPC 통신을 강제한다.",
+      "quiz": {
+        "q": "Zerologon(CVE-2020-1472)의 근본 원인은?",
+        "choices": [
+          "암호화 인증 프로토콜 구현 결함",
+          "브라우저 팝업 차단 해제",
+          "이메일 첨부파일 크기 제한 초과"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "취약한 암호화 초기화 처리로 인증 우회가 발생한다."
+      }
+    },
+    {
+      "name": "MOVEit Transfer SQLi",
+      "cve": "CVE-2023-34362",
+      "cvss": 9.8,
+      "product": "Progress MOVEit Transfer",
+      "summary": "웹 애플리케이션의 SQL 인젝션 결함으로 데이터베이스 무단 접근이 가능한 취약점이다.",
+      "fix": "제조사 보안 패치 적용 및 침해 흔적을 점검한다.",
+      "quiz": {
+        "q": "MOVEit Transfer 취약점(CVE-2023-34362)의 유형은?",
+        "choices": [
+          "SQL 인젝션",
+          "물리적 케이블 단선",
+          "DNS 위임 만료"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "입력 검증 부재로 데이터베이스 조작이 가능해진다."
+      }
+    },
+    {
+      "name": "XZ Utils Backdoor",
+      "cve": "CVE-2024-3094",
+      "cvss": 10.0,
+      "product": "XZ Utils",
+      "summary": "오픈소스 압축 라이브러리의 빌드 과정에 악성 코드가 삽입된 공급망 취약점이다.",
+      "fix": "영향 버전(5.6.0, 5.6.1)을 안전한 이전·수정 버전으로 교체한다.",
+      "quiz": {
+        "q": "XZ Utils(CVE-2024-3094) 사건이 대표적인 사례인 위협 유형은?",
+        "choices": [
+          "소프트웨어 공급망 공격",
+          "로컬 디스크 용량 부족",
+          "네트워크 케이블 간섭"
+        ],
+        "answer": "<conceptual_placeholder>",
+        "explain": "신뢰된 오픈소스 배포 경로가 악용된 공급망 위협이다."
+      }
+    }
+  ]
+}

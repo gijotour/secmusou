@@ -1,0 +1,12 @@
+Copyright (c) 2026 GIJO. All rights reserved.
+
+이 저장소의 소스 코드와 콘텐츠는 보고 읽을 수 있도록 공개되어 있습니다.
+그러나 사용·복제·수정·배포할 권리는 주지 않습니다. 필요하면 GIJO 에 문의하세요.
+
+The source code and content in this repository are publicly visible for reading only.
+No permission is granted to use, copy, modify, or distribute them.
+
+Third-party components keep their own licenses:
+- vendor/three.min.js — three.js r128, MIT License (Copyright 2010-2021 Three.js Authors)
+- Black Han Sans font (loaded from Google Fonts) — SIL Open Font License 1.1
+- CVE information — CISA KEV and NVD, U.S. government public data

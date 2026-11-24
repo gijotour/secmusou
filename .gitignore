@@ -24,3 +24,10 @@ tools/out-agy-review*.md
 
 # Labs 세션 전달 메모 (로컬 경로가 들어 있음)
 HANDOFF-LABS.md
+
+# 안드로이드 앱 포장: 서명 키와 빌드 결과물은 올리지 않는다(키는 store/android/ 에 두되 커밋되지 않는다 — 따로 백업)
+*.keystore
+*.jks
+store/android/*
+!store/android/twa-manifest.json
+!store/android/BUILD.md
